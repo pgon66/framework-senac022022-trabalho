@@ -1,5 +1,7 @@
 <?php
 
+namespace Bootstrap;
+
 class Env {
 
     public static function execute() {
