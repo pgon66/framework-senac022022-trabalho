@@ -11,6 +11,7 @@ class ProcessServerElements {
     private $httpHost;
     private $uri;
     private $variables;
+    private $verb;
 
     private function __construct() {
         // SINGLETON 
@@ -62,5 +63,13 @@ class ProcessServerElements {
     
     public function getVariables() {
         return $this->variables;
+    }
+
+    public function setVerb($verb) {
+        $this->verb = $verb;
+    }
+
+    public function getVerb() {
+        return $this->verb;        
     }
 }
