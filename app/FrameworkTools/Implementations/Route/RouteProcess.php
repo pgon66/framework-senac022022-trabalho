@@ -4,6 +4,7 @@ namespace App\FrameworkTools\Implementations\Route;
 
 use App\FrameworkTools\ProcessServerElements;
 use App\Controllers\HelloWorldController;
+use App\Controllers\TrainQueryController;
 
 class RouteProcess {
 
@@ -19,8 +20,11 @@ class RouteProcess {
                     case '/hello-world':
                         return (new HelloWorldController)->execute();
                     break;
-                }
 
+                    case '/train-query':
+                        return (new TrainQueryController)->execute();
+                    break;
+                }
         }
 
     }
