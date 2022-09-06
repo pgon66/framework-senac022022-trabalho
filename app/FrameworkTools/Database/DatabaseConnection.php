@@ -18,9 +18,9 @@ class DatabaseConnection {
         
 
         $this->pdo = new \PDO(
-            "mysql:host={$host};dbname={$database};port={$port};", 
-            $user, 
-            $password
+            "mysql:host=localhost;dbname=frameworksenac;port=3306;", 
+            "root", 
+            ""
         );
     }
 
