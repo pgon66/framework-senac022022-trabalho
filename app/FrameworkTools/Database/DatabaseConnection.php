@@ -2,6 +2,8 @@
 
 namespace App\FrameworkTools\Database;
 
+use PDO;
+
 class DatabaseConnection {
 
     private static $instance;
@@ -17,7 +19,7 @@ class DatabaseConnection {
         $port = env('DB_PORT');
         
 
-        $this->pdo = new \PDO(
+        $this->pdo = new PDO(
             "mysql:host=localhost;dbname=frameworksenac;port=3306;", 
             "root", 
             ""

@@ -9,8 +9,18 @@ use App\FrameworkTools\Database\DatabaseConnection;
 class InsertDataController extends AbstractControllers{
 
     public function exec() {
-        $params = (array) json_decode(file_get_contents('php://input'), TRUE);
-        dd($params);
+        $pdo = DatabaseConnection::start()->getPDO();
+        $params = $this->processServerElements->getInputJSONData();
+        
+        $query = "INSERT INTO user (name,last_name,age) VALUES (:name,:last_name,:age)";
+        
+        $statement = $pdo->prepare($query);
+
+        $statement->execute([
+            ':name' => $params["name"],
+            ':last_name' => $params["lastName"],
+            ':age' => $params["age"]
+        ]);
 
         view([
             'success'=> true 
