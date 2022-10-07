@@ -4,42 +4,32 @@ namespace App\FrameworkTools\Implementations\Route;
 
 use App\FrameworkTools\ProcessServerElements;
 
-use App\Controllers\HelloWorldController;
-use App\Controllers\TrainQueryController;
-use App\Controllers\InsertDataController;
+
+use App\FrameworkTools\Implementations\Route\Get;
+use App\FrameworkTools\Implementations\Route\Post;
 
 class RouteProcess {
 
+    use Get;
+    use Post;
+
+    private static $processServerElements;
+
     public static function execute() {
-        $processServerElements = ProcessServerElements::start();
+        self::$processServerElements = ProcessServerElements::start();
         $routeArray = [];
 
-        switch ($processServerElements->getVerb()) {
+        switch (self::$processServerElements->getVerb()) {
             case 'GET':
-
-                switch ($processServerElements->getRoute()) {
-                    
-                    case '/hello-world':
-                        return (new HelloWorldController)->execute();
-                    break;
-
-                    case '/train-query':
-                        return (new TrainQueryController)->execute();
-                    break;
-                }
-            
+                return self::get();
             case 'POST':
-
-                switch ($processServerElements->getRoute()) {
-                    
-                    case '/insert-data':
-                        return (new InsertDataController)->exec();
-                    break;
-
-                }
+                return self::post();
 
         }
 
     }
+
+
+
 
 }
