@@ -42,7 +42,59 @@ class UpdateDataController extends AbstractControllers {
 
             $params = $this->processServerElements->getInputJSONData();
 
-            dd($params);
+            if ((!$params) || sizeof($params) === 0) {
+                $missingAttribute = 'paramsNotExist';
+                throw new \Exception("You have to inform the params attr to update");
+            }
+
+            $updateStructureQuery = '';
+
+
+            foreach ($params as $key => $value) {
+                if (!in_array($key,['name','last_name','age'])) {
+                    $missingAttribute = "keyNotAcceptable";
+                    throw new \Exception($key);
+                }
+
+                if ($key === 'name') {
+                    $updateStructureQuery .= "name = :name,";
+
+                }
+
+                if ($key === 'last_name') {
+
+                    $updateStructureQuery .= " last_name = :last_name,";
+
+                }
+
+                if ($key === 'age') {
+                    $updateStructureQuery .= "age = :age,";
+                }
+
+            }
+
+            $updateStringInArray = str_split($updateStructureQuery);
+            
+            array_pop($updateStringInArray);
+
+            $newStringElementsSQL = implode($updateStringInArray);
+
+            $sql = "UPDATE 
+                        user 
+                    SET
+                        {$newStringElementsSQL}
+                    WHERE
+                        id_user = {$userId}
+                    ";
+
+            $statement = $this->pdo->prepare($sql);
+            
+            $statement->execute([
+                ':name' => $params["name"],
+                ':last_name' => $params["last_name"],
+                ':age' => $params["age"]
+            ]);
+
             
         } catch (\Exception $e) {
             $response = [
