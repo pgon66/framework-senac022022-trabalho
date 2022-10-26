@@ -3,10 +3,12 @@
 namespace App\FrameworkTools\Implementations\Route;
 
 use App\Controllers\HelloWorldController;
-use App\Controllers\TrainQueryController;
+use App\Controllers\PedroController;
 
 trait Get {
     
+    private static $processServerElements;
+
     private static function get() {
         switch (self::$processServerElements->getRoute()) {
                     
@@ -14,8 +16,8 @@ trait Get {
                 return (new HelloWorldController)->execute();
             break;
 
-            case '/train-query':
-                return (new TrainQueryController)->execute();
+            case '/goncalves1':
+                return (new PedroController)->goncalves1();
             break;
         }
     }

@@ -1,15 +1,14 @@
-DROP DATABASE IF EXISTS frameworksenac;
-CREATE DATABASE frameworksenac;
-use frameworksenac;
+DROP DATABASE IF EXISTS trabalho1quartobi;
+CREATE DATABASE trabalho1quartobi;
 
-CREATE TABLE user(
-    id_user INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    name       VARCHAR(255) NOT NULL,
-    last_name  VARCHAR(255) NOT NULL,
-    age        INTEGER
+USE trabalho1quartobi;
+
+CREATE TABLE petshop (
+        id_petshop INTEGER PRIMARY KEY AUTO_INCREMENT,
+        name_pet VARCHAR(255),
+        type_service ENUM('banho','tosa')
 );
 
-INSERT INTO user (name,last_name) VALUES
-('Jon', 'San'),
-('Joao','Silva'),
-('Pedro','de Lima');
+INSERT INTO petshop(name_pet, type_service) 
+VALUES 
+('teste', 'tosa');
